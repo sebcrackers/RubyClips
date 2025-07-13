@@ -30,78 +30,42 @@
     }
 
     header {
-      padding: 100px 20px;
+      padding: 80px 20px;
       text-align: center;
-      background: linear-gradient(135deg, #0066FF 0%, #004bcc 25%, #003399 50%, #002266 75%, #1c1c1c 100%);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
-      animation: pulse 4s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.1); opacity: 0.1; }
     }
 
     header h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 4em;
+      font-size: 3em;
       background: linear-gradient(135deg, #0066FF, #000000);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 0 30px rgba(0, 102, 255, 0.3);
-      letter-spacing: 3px;
+      margin-bottom: 20px;
     }
 
     header p {
-      font-size: 1.3em;
-      color: #e0e0e0;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      line-height: 1.8;
+      font-size: 1.2em;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 30px;
     }
 
     .cta-btn {
-      background: linear-gradient(135deg, var(--primary), #004bcc);
+      background: var(--primary);
       color: #fff;
       border: none;
-      padding: 18px 40px;
+      padding: 15px 30px;
       border-radius: 50px;
-      font-size: 1.2em;
-      font-weight: 600;
+      font-size: 1.1em;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: background 0.3s;
       text-decoration: none;
       display: inline-block;
-      position: relative;
-      z-index: 2;
-      box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
-      letter-spacing: 1px;
-      text-transform: uppercase;
     }
 
     .cta-btn:hover {
-      background: linear-gradient(135deg, #004bcc, var(--primary));
-      transform: translateY(-3px);
-      box-shadow: 0 12px 35px rgba(0, 102, 255, 0.4);
+      background: #004bcc;
     }
 
     section {
