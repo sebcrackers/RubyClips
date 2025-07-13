@@ -229,6 +229,83 @@
       color: var(--text-muted);
     }
 
+    .screenshots-gallery {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .screenshots-gallery h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary);
+      margin-bottom: 30px;
+      font-size: 1.8em;
+    }
+
+    .screenshots-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .screenshot-item {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .screenshot-item:nth-child(1) { animation-delay: 0.1s; }
+    .screenshot-item:nth-child(2) { animation-delay: 0.2s; }
+    .screenshot-item:nth-child(3) { animation-delay: 0.3s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .screenshot-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+    }
+
+    .screenshot-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .screenshot-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .screenshot-caption {
+      padding: 20px;
+      background: linear-gradient(135deg, var(--card-bg), var(--card-bg-light));
+    }
+
+    .screenshot-caption h4 {
+      color: var(--gold);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 8px;
+      font-size: 1.1em;
+    }
+
+    .screenshot-caption p {
+      color: var(--text-muted);
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+
     .faq-item {
       background: var(--card-bg-light);
       margin-bottom: 15px;
@@ -339,6 +416,33 @@
       <div class="result-item">
         <h3>50+</h3>
         <p>Brands and creators served</p>
+      </div>
+    </div>
+    
+    <div class="screenshots-gallery">
+      <h3>Client Success Screenshots</h3>
+      <div class="screenshots-container">
+        <div class="screenshot-item">
+          <img src="https://via.placeholder.com/400x200/0066FF/ffffff?text=Viral+TikTok+Results" alt="TikTok Analytics Screenshot">
+          <div class="screenshot-caption">
+            <h4>TikTok Success</h4>
+            <p>Client's video reached 2.3M views in 48 hours</p>
+          </div>
+        </div>
+        <div class="screenshot-item">
+          <img src="https://via.placeholder.com/400x200/FFDD00/000000?text=Instagram+Growth" alt="Instagram Analytics Screenshot">
+          <div class="screenshot-caption">
+            <h4>Instagram Growth</h4>
+            <p>500K+ reach with our optimized reels</p>
+          </div>
+        </div>
+        <div class="screenshot-item">
+          <img src="https://via.placeholder.com/400x200/333333/ffffff?text=YouTube+Shorts" alt="YouTube Analytics Screenshot">
+          <div class="screenshot-caption">
+            <h4>YouTube Shorts</h4>
+            <p>1.8M impressions from short-form content</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
