@@ -243,56 +243,46 @@
       font-size: 1.8em;
     }
 
-    .screenshots-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .screenshot-item {
-      background: var(--card-bg);
-      border-radius: 15px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      cursor: pointer;
+    .carousel-container {
       position: relative;
-      animation: fadeInUp 0.6s ease forwards;
-      opacity: 0;
-      transform: translateY(30px);
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 102, 255, 0.15);
     }
 
-    .screenshot-item:nth-child(1) {
-      animation-delay: 0.1s;
+    .screenshots-container {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      animation: slideInFromRight 0.8s ease-out;
     }
 
-    .screenshot-item:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .screenshot-item:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    @keyframes fadeInUp {
+    @keyframes slideInFromRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
       to {
+        transform: translateX(0);
         opacity: 1;
-        transform: translateY(0);
       }
     }
 
-    .screenshot-item:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 102, 255, 0.2);
+    .screenshot-item {
+      min-width: 100%;
+      background: var(--card-bg);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
     }
 
     .screenshot-item img {
       width: 100%;
-      height: auto;
-      max-height: 200px;
+      height: 300px;
       object-fit: contain;
       transition: transform 0.4s ease;
+      background: var(--card-bg-light);
     }
 
     .screenshot-item:hover img {
@@ -300,21 +290,113 @@
     }
 
     .screenshot-caption {
-      padding: 20px;
+      padding: 25px;
       background: linear-gradient(135deg, var(--card-bg), var(--card-bg-light));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot-caption::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .screenshot-item:hover .screenshot-caption::before {
+      left: 100%;
     }
 
     .screenshot-caption h4 {
       color: var(--gold);
       font-family: 'Orbitron', sans-serif;
       margin-bottom: 8px;
-      font-size: 1.1em;
+      font-size: 1.2em;
+      text-shadow: 0 0 10px rgba(255, 221, 0, 0.3);
     }
 
     .screenshot-caption p {
       color: var(--text-muted);
-      font-size: 0.9em;
+      font-size: 1em;
       line-height: 1.4;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 102, 255, 0.8);
+      border: none;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 18px;
+      font-weight: bold;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+    }
+
+    .carousel-nav:hover {
+      background: rgba(0, 102, 255, 1);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 8px 25px rgba(0, 102, 255, 0.5);
+    }
+
+    .carousel-nav.prev {
+      left: 20px;
+    }
+
+    .carousel-nav.next {
+      right: 20px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .indicator::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--primary);
+      transition: left 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .indicator.active::before,
+    .indicator:hover::before {
+      left: 0;
+    }
+
+    .indicator.active {
+      background: var(--primary);
+      box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+      transform: scale(1.2);
     }
 
     .faq-item {
@@ -436,30 +518,39 @@
 
     <div class="screenshots-gallery">
       <h3>Instagram Success Screenshots</h3>
-      <div class="screenshots-container">
-        <div class="screenshot-item">
-          <img src="https://i.ibb.co/XxkRqRxV/Screenshot-20250620-082740-Instagram-1.jpg"
-            alt="Instagram Analytics Screenshot">
-          <div class="screenshot-caption">
-            <h4>Instagram Reel Success</h4>
-            <p>Client's reel achieved massive engagement and reach</p>
+      <div class="carousel-container">
+        <div class="screenshots-container">
+          <div class="screenshot-item">
+            <img src="https://i.ibb.co/XxkRqRxV/Screenshot-20250620-082740-Instagram-1.jpg"
+              alt="Instagram Analytics Screenshot">
+            <div class="screenshot-caption">
+              <h4>Instagram Reel Success</h4>
+              <p>Client's reel achieved massive engagement and reach</p>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <img src="https://i.ibb.co/LD9yppGB/Screenshot-20250621-083222-Instagram-1.jpg"
+              alt="Instagram Analytics Screenshot">
+            <div class="screenshot-caption">
+              <h4>Instagram Growth</h4>
+              <p>High impressions and reach with our optimized content</p>
+            </div>
+          </div>
+          <div class="screenshot-item">
+            <img src="https://via.placeholder.com/400x200/333333/ffffff?text=Instagram+Screenshot+3" alt="Instagram Analytics Screenshot">
+            <div class="screenshot-caption">
+              <h4>Instagram Performance</h4>
+              <p>Consistent viral results across multiple posts</p>
+            </div>
           </div>
         </div>
-        <div class="screenshot-item">
-          <img src="https://i.ibb.co/LD9yppGB/Screenshot-20250621-083222-Instagram-1.jpg"
-            alt="Instagram Analytics Screenshot">
-          <div class="screenshot-caption">
-            <h4>Instagram Growth</h4>
-            <p>High impressions and reach with our optimized content</p>
-          </div>
-        </div>
-        <div class="screenshot-item">
-          <img src="https://via.placeholder.com/400x200/333333/ffffff?text=Instagram+Screenshot+3" alt="Instagram Analytics Screenshot">
-          <div class="screenshot-caption">
-            <h4>Instagram Performance</h4>
-            <p>Consistent viral results across multiple posts</p>
-          </div>
-        </div>
+        <button class="carousel-nav prev" onclick="prevSlide()">‹</button>
+        <button class="carousel-nav next" onclick="nextSlide()">›</button>
+      </div>
+      <div class="carousel-indicators">
+        <div class="indicator active" onclick="goToSlide(0)"></div>
+        <div class="indicator" onclick="goToSlide(1)"></div>
+        <div class="indicator" onclick="goToSlide(2)"></div>
       </div>
     </div>
   </section>
@@ -492,11 +583,74 @@
   </footer>
 
   <script>
+    // FAQ functionality
     document.querySelectorAll('.faq-question').forEach(question => {
       question.addEventListener('click', () => {
         question.parentElement.classList.toggle('active');
       });
     });
+
+    // Carousel functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.screenshot-item');
+    const indicators = document.querySelectorAll('.indicator');
+    const totalSlides = slides.length;
+
+    function updateCarousel() {
+      const container = document.querySelector('.screenshots-container');
+      container.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update indicators
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
+
+    // Auto-advance carousel every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+
+    const carouselContainer = document.querySelector('.carousel-container');
+    
+    carouselContainer.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
+
+    carouselContainer.addEventListener('touchend', e => {
+      endX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = startX - endX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          nextSlide(); // Swipe left - go to next
+        } else {
+          prevSlide(); // Swipe right - go to previous
+        }
+      }
+    }
   </script>
 </body>
 
