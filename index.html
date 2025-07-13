@@ -30,25 +30,54 @@
     }
 
     header {
-      padding: 80px 20px;
+      padding: 100px 20px;
       text-align: center;
+      background: linear-gradient(135deg, #0066FF 0%, #004bcc 50%, #1c1c1c 100%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     header h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 3em;
-      background: linear-gradient(135deg, #0066FF, #000000);
+      font-size: 4em;
+      background: linear-gradient(135deg, #ffffff, #e0e0e0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      letter-spacing: 4px;
+      font-weight: 700;
     }
 
     header p {
-      font-size: 1.2em;
-      color: var(--text-muted);
-      max-width: 700px;
-      margin: 0 auto 30px;
+      font-size: 1.3em;
+      color: #e0e0e0;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      line-height: 1.7;
+    }
+
+    header p strong {
+      color: var(--gold);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255, 221, 0, 0.3);
     }
 
     .cta-btn {
@@ -251,7 +280,7 @@
 
   <header>
     <h1>RUBY CLIPS</h1>
-    <p>Extend your reach through viral short-form content. We help creators and brands grow faster with high-quality video clips and guaranteed views.</p>
+    <p>Extend your reach through <strong>viral short-form content</strong>. We help <strong>creators and brands</strong> grow faster with <strong>high-quality video clips</strong> and <strong>guaranteed views</strong>.</p>
     <a href="#pricing" class="cta-btn">See Pricing</a>
   </header>
 
