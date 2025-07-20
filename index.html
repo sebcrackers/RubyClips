@@ -234,15 +234,15 @@
 
       <div class="max-w-4xl mx-auto">
         <div class="clip-sample bg-dark-700 rounded-xl overflow-hidden border border-dark-600">
-          <div class="aspect-w-16 aspect-h-9 bg-dark-900 flex items-center justify-center relative">
-            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-dark-900/20 z-10"></div>
-            <div class="text-center p-8 z-20">
-              <button
-                class="w-20 h-20 bg-gradient-to-r from-ruby to-orange-500 rounded-full flex items-center justify-center mb-4 glow hover:opacity-90 transition-opacity">
-                <i class="fas fa-play text-white text-2xl"></i>
-              </button>
-              <p class="text-white font-medium">Sample clip preview - This would show a real example of our work</p>
-            </div>
+          <div class="relative" style="padding-bottom: 56.25%; height: 0;">
+            <iframe 
+              src="https://www.youtube.com/embed/xxNFkHzwAA0?si=y7_zblNqDdnXemEc" 
+              title="Sample Clip"
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen
+              class="absolute top-0 left-0 w-full h-full rounded-t-xl">
+            </iframe>
           </div>
           <div class="p-6 bg-dark-700">
             <div class="flex justify-between items-center">
@@ -444,30 +444,30 @@
       </div>
 
       <div class="max-w-3xl mx-auto bg-dark-700 p-8 rounded-xl border border-dark-600">
-        <form>
+        <form action="https://formspree.io/f/manbqbdr" method="POST">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
               <label for="app-name" class="block text-gray-300 font-medium mb-2">Full Name</label>
-              <input type="text" id="app-name"
+              <input type="text" id="app-name" name="name" required
                 class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white">
             </div>
 
             <div>
               <label for="app-email" class="block text-gray-300 font-medium mb-2">Email Address</label>
-              <input type="email" id="app-email"
+              <input type="email" id="app-email" name="email" required
                 class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white">
             </div>
 
             <div>
               <label for="app-portfolio" class="block text-gray-300 font-medium mb-2">Portfolio Link</label>
-              <input type="url" id="app-portfolio"
+              <input type="url" id="app-portfolio" name="portfolio"
                 class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white"
                 placeholder="Website, YouTube, etc.">
             </div>
 
             <div>
               <label for="app-experience" class="block text-gray-300 font-medium mb-2">Years of Experience</label>
-              <select id="app-experience"
+              <select id="app-experience" name="experience"
                 class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white">
                 <option value="">Select</option>
                 <option value="0-1">0-1 years</option>
@@ -481,19 +481,19 @@
             <label class="block text-gray-300 font-medium mb-2">Which platforms are you most experienced with?</label>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
               <label class="flex items-center">
-                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <input type="checkbox" name="platforms" value="TikTok" class="rounded text-ruby bg-dark-600 border-dark-500">
                 <span class="ml-2 text-gray-300">TikTok</span>
               </label>
               <label class="flex items-center">
-                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <input type="checkbox" name="platforms" value="Instagram" class="rounded text-ruby bg-dark-600 border-dark-500">
                 <span class="ml-2 text-gray-300">Instagram</span>
               </label>
               <label class="flex items-center">
-                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <input type="checkbox" name="platforms" value="YouTube" class="rounded text-ruby bg-dark-600 border-dark-500">
                 <span class="ml-2 text-gray-300">YouTube</span>
               </label>
               <label class="flex items-center">
-                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <input type="checkbox" name="platforms" value="Twitter" class="rounded text-ruby bg-dark-600 border-dark-500">
                 <span class="ml-2 text-gray-300">Twitter</span>
               </label>
             </div>
@@ -502,7 +502,7 @@
           <div class="mb-8">
             <label for="app-why" class="block text-gray-300 font-medium mb-2">Why do you want to join Ruby
               Clips?</label>
-            <textarea id="app-why" rows="4"
+            <textarea id="app-why" name="why_join" rows="4"
               class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white"></textarea>
           </div>
 
