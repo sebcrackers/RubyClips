@@ -2,657 +2,624 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruby Clips – Short-Form Video Agency</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet" />
+  <base target="_self">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruby Clips | Content Clipping Agency</title>
+  <meta name="description"
+    content="Professional content clipping services with guaranteed results. 200+ expert clippers generating millions of views for clients.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ruby: "#e11d48",
+            rubyDark: "#9f1239",
+            dark: {
+              900: "#0a0a0a",
+              800: "#1a1a1a",
+              700: "#2a2a2a",
+              600: "#3a3a3a",
+              500: "#4a4a4a"
+            },
+            light: "#f8fafc"
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': {opacity: '0'},
+              '100%': {opacity: '1'}
+            },
+            slideUp: {
+              '0%': {transform: 'translateY(20px)', opacity: '0'},
+              '100%': {transform: 'translateY(0)', opacity: '1'}
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --primary: #0066FF;
-      --gold: #FFDD00;
-      --text-light: #ddd;
-      --text-muted: #aaa;
-      --bg: #1c1c1c;
-      --card-bg: #2a2a2a;
-      --card-bg-light: #333;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: var(--bg);
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    header {
-      padding: 100px 20px;
-      text-align: center;
-      background: linear-gradient(135deg, #0066FF 0%, #003380 25%, #1c1c1c 60%, #000000 100%);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      position: relative;
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 4em;
-      background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    .gradient-text {
+      background: linear-gradient(90deg, #e11d48 0%, #f97316 100%);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-      letter-spacing: 4px;
-      font-weight: 700;
+      color: transparent;
     }
 
-    header p {
-      font-size: 1.3em;
-      color: #e0e0e0;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      line-height: 1.7;
+    .glow {
+      box-shadow: 0 0 15px rgba(225, 29, 72, 0.3);
     }
 
-    header p strong {
-      color: var(--gold);
-      font-weight: 700;
-      text-shadow: 0 0 10px rgba(255, 221, 0, 0.3);
-    }
-
-    .cta-btn {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 50px;
-      font-size: 1.1em;
-      cursor: pointer;
-      transition: background 0.3s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .cta-btn:hover {
-      background: #004bcc;
-    }
-
-    section {
-      padding: 60px 20px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.2em;
-      color: var(--primary);
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .video-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .video-section iframe {
-      width: 100%;
-      max-width: 600px;
-      height: 340px;
-      border-radius: 10px;
-      border: none;
-    }
-
-    .video-text {
-      max-width: 450px;
-      color: var(--text-muted);
-      font-size: 1.1em;
-    }
-
-    .about p {
-      max-width: 700px;
-      margin: 0 auto;
-      color: var(--text-muted);
-      font-size: 1.2em;
-      text-align: center;
-    }
-
-    .pricing-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .price-card {
-      background: var(--card-bg);
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      transition: transform 0.3s, border-color 0.3s;
-      border: 2px solid transparent;
-    }
-
-    .price-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-    }
-
-    .price-card h3 {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--primary);
-      margin-bottom: 15px;
-      font-size: 1.6em;
-    }
-
-    .price-card ul {
-      list-style: none;
-      margin: 20px 0;
-      padding: 0;
-      text-align: left;
-      color: var(--text-muted);
-    }
-
-    .price-card ul li {
-      margin-bottom: 10px;
-      position: relative;
-      padding-left: 20px;
-    }
-
-    .price-card ul li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-    }
-
-    .price-card .price {
-      font-size: 1.5em;
-      color: var(--gold);
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-
-    .price-card button {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .price-card button:hover {
-      background: #004bcc;
-    }
-
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      text-align: center;
-    }
-
-    .result-item h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2em;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .result-item p {
-      color: var(--text-muted);
-    }
-
-    .screenshots-gallery {
-      margin-top: 60px;
-      text-align: center;
-    }
-
-    .screenshots-gallery h3 {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--primary);
-      margin-bottom: 30px;
-      font-size: 1.8em;
-    }
-
-    .slideshow-container {
-      position: relative;
-      max-width: 600px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0, 102, 255, 0.15);
-      background: var(--card-bg);
-    }
-
-    .screenshots-container {
-      position: relative;
-      height: 400px;
-    }
-
-    .screenshot-item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transform: translateX(100px) scale(0.9);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .screenshot-item.active {
-      opacity: 1;
-      transform: translateX(0) scale(1);
-    }
-
-    .screenshot-item.prev {
-      transform: translateX(-100px) scale(0.9);
-    }
-
-    .screenshot-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: var(--card-bg-light);
-      transition: transform 0.6s ease;
-      border-radius: 20px;
-    }
-
-    .screenshot-item:hover img {
-      transform: scale(1.05);
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 15px 40px rgba(0, 102, 255, 0.15);
-      }
-      50% {
-        box-shadow: 0 20px 50px rgba(0, 102, 255, 0.25);
-      }
-    }
-
-    .slideshow-container {
-      animation: slideIn 1s ease-out, pulse 3s ease-in-out infinite;
-    }
-
-    .slideshow-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 102, 255, 0.8);
-      border: none;
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 18px;
-      font-weight: bold;
-      z-index: 10;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
-      opacity: 0.7;
-    }
-
-    .slideshow-nav:hover {
-      background: rgba(0, 102, 255, 1);
-      transform: translateY(-50%) scale(1.1);
-      box-shadow: 0 8px 25px rgba(0, 102, 255, 0.5);
-      opacity: 1;
-    }
-
-    .slideshow-nav.prev {
-      left: 15px;
-    }
-
-    .slideshow-nav.next {
-      right: 15px;
-    }
-
-    .slideshow-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 25px;
-    }
-
-    .indicator {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .indicator::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: var(--primary);
-      transition: left 0.4s ease;
-      border-radius: 50%;
-    }
-
-    .indicator.active::before,
-    .indicator:hover::before {
-      left: 0;
-    }
-
-    .indicator.active {
-      background: var(--primary);
-      box-shadow: 0 0 15px rgba(0, 102, 255, 0.6);
-      transform: scale(1.3);
-    }
-
-    @keyframes indicatorPulse {
-      0%, 100% {
-        transform: scale(1.3);
-      }
-      50% {
-        transform: scale(1.5);
-      }
-    }
-
-    .indicator.active {
-      animation: indicatorPulse 2s ease-in-out infinite;
-    }
-
-    .faq-item {
-      background: var(--card-bg-light);
-      margin-bottom: 15px;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .faq-question {
-      padding: 15px 20px;
-      cursor: pointer;
-      font-weight: bold;
-      color: var(--primary);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      padding: 0 20px;
-      color: var(--text-muted);
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 300px;
-      padding: 15px 20px;
-    }
-
-    .apply {
-      text-align: center;
-    }
-
-    .apply p {
-      max-width: 700px;
-      margin: 0 auto 20px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: var(--text-muted);
-      font-size: 0.9em;
-      margin-top: 40px;
+    .border-gradient {
+      border: 1px solid transparent;
+      background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
+        linear-gradient(135deg, #e11d48, #f97316) border-box;
     }
   </style>
 </head>
 
-<body>
-
-  <header>
-    <h1>RUBY CLIPS</h1>
-    <p>Extend your reach through <strong>viral short-form content</strong>. We help <strong>creators and brands</strong>
-      grow faster with <strong>high-quality video clips</strong> and <strong>guaranteed views</strong>.</p>
-    <a href="#pricing" class="cta-btn">See Pricing</a>
+<body class="font-sans bg-dark-900 text-gray-300">
+  <!-- Navigation -->
+  <header class="fixed w-full z-50 bg-dark-800/90 backdrop-blur-sm border-b border-dark-700">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-ruby to-orange-500 flex items-center justify-center">
+          <i class="fas fa-cut text-white text-sm"></i>
+        </div>
+        <span class="text-xl font-bold text-white">Ruby<span class="gradient-text">Clips</span></span>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#services" class="font-medium text-gray-400 hover:text-white transition-colors">Services</a>
+        <a href="#pricing" class="font-medium text-gray-400 hover:text-white transition-colors">Pricing</a>
+        <a href="#testimonials" class="font-medium text-gray-400 hover:text-white transition-colors">Results</a>
+        <a href="#faq" class="font-medium text-gray-400 hover:text-white transition-colors">FAQ</a>
+      </div>
+      <a href="#contact"
+        class="bg-gradient-to-r from-ruby to-orange-500 text-white px-6 py-2 rounded-full font-medium hover:opacity-90 transition-opacity glow">
+        Get Started
+      </a>
+    </nav>
   </header>
 
-  <section id="sample">
-    <h2 class="section-title">Sample Clip</h2>
-    <div class="video-section">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-      <div class="video-text">
-        <p>Here’s a sample of how we transform long-form videos into engaging short-form content ready for TikTok,
-          Reels, and Shorts. Clean captions, fast cuts, and hooks that stop the scroll—that’s what we deliver.</p>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 bg-gradient-to-b from-dark-800 to-dark-900">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center animate-fade-in">
+        <div class="inline-block mb-6 px-4 py-2 bg-dark-700 rounded-full border border-dark-600">
+          <span class="text-sm font-medium text-gray-400">WORKING WITH 200+ CLIPPERS</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">Premium Content <span
+            class="gradient-text">Clipping</span></h1>
+        <p class="text-xl md:text-2xl mb-10 text-gray-400">Our network of professional clippers has generated over <span
+            class="font-bold text-white">1,000,000+ views</span> with viral-ready content</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#pricing"
+            class="bg-white text-dark-900 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors">
+            View Pricing
+          </a>
+          <a href="#contact"
+            class="border-2 border-gray-600 text-white px-8 py-4 rounded-full font-bold hover:bg-dark-700 transition-colors">
+            Contact Us
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="about">
-    <h2 class="section-title">About Ruby Clips</h2>
-    <p>We specialize in turning your long-form videos, podcasts, and social media content into viral short-form videos.
-      Whether you’re an influencer, brand, or agency, we ensure your message gets seen by millions.</p>
-  </section>
-
-  <section id="pricing">
-    <h2 class="section-title">Pricing</h2>
-    <div class="pricing-cards">
-      <div class="price-card">
-        <h3>Starter Plan</h3>
-        <p class="price">$5 / clip</p>
-        <ul>
-          <li>Up to 20 clips/week</li>
-          <li>Custom editing & captions</li>
-          <li>Fast delivery (24-48h)</li>
-        </ul>
-        <button>Order Clips</button>
-      </div>
-      <div class="price-card">
-        <h3>Growth Plan</h3>
-        <p class="price">$1 per 1,000 views</p>
-        <ul>
-          <li>Unlimited clips</li>
-          <li>Managed view campaigns</li>
-          <li>Scaling for big accounts</li>
-        </ul>
-        <button>Apply Now</button>
+  <!-- Stats Section -->
+  <section class="py-16 bg-dark-800">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div
+          class="p-8 rounded-xl bg-dark-700 border border-dark-600 animate-slide-up hover:border-ruby/30 transition-colors">
+          <div class="text-5xl font-bold gradient-text mb-2">200+</div>
+          <div class="text-lg font-medium text-gray-300">Professional Clippers</div>
+        </div>
+        <div
+          class="p-8 rounded-xl bg-dark-700 border border-dark-600 animate-slide-up hover:border-ruby/30 transition-colors"
+          style="animation-delay: 0.1s;">
+          <div class="text-5xl font-bold gradient-text mb-2">1M+</div>
+          <div class="text-lg font-medium text-gray-300">Views Generated</div>
+        </div>
+        <div
+          class="p-8 rounded-xl bg-dark-700 border border-dark-600 animate-slide-up hover:border-ruby/30 transition-colors"
+          style="animation-delay: 0.2s;">
+          <div class="text-5xl font-bold gradient-text mb-2">100%</div>
+          <div class="text-lg font-medium text-gray-300">On-Time Delivery Rate</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="results">
-    <h2 class="section-title">Results</h2>
-    <div class="results-grid">
-      <div class="result-item">
-        <h3>20M+</h3>
-        <p>Views generated for clients</p>
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-dark-900">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-sm font-medium text-gray-500">PRICING PLANS</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Simple, Transparent <span
+            class="gradient-text">Pricing</span></h2>
+        <p class="text-xl text-gray-400 mt-4 max-w-2xl mx-auto">Choose the service that fits your needs and budget</p>
       </div>
-      <div class="result-item">
-        <h3>5,000+</h3>
-        <p>Short-form videos edited</p>
-      </div>
-      <div class="result-item">
-        <h3>50+</h3>
-        <p>Brands and creators served</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Pricing Card 1 -->
+        <div
+          class="bg-dark-800 p-8 rounded-xl border border-dark-700 hover:border-ruby/50 transition-colors hover-scale">
+          <h3 class="text-2xl font-bold text-white mb-2">Premium Clips</h3>
+          <p class="text-lg text-gray-400 mb-6">Perfect for consistent content creation</p>
+          <div class="text-5xl font-bold gradient-text mb-6">$10<span
+              class="text-xl font-normal text-gray-400">/clip</span></div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Up to 14 clips per week</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Professional editing</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Platform optimization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Weekly delivery</span>
+            </li>
+          </ul>
+          <a href="#contact"
+            class="block w-full bg-gradient-to-r from-ruby to-orange-500 text-white text-center py-4 rounded-full font-bold hover:opacity-90 transition-opacity glow">
+            Choose Plan
+          </a>
+        </div>
+
+        <!-- Pricing Card 2 -->
+        <div
+          class="bg-dark-800 p-8 rounded-xl border border-dark-700 hover:border-ruby/50 transition-colors hover-scale">
+          <h3 class="text-2xl font-bold text-white mb-2">View Campaigns</h3>
+          <p class="text-lg text-gray-400 mb-6">Scale your reach with our network</p>
+          <div class="text-5xl font-bold gradient-text mb-6">$1<span class="text-xl font-normal text-gray-400">/1,000
+              views</span></div>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Performance-based pricing</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Scalable with budget</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Strategic distribution</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300">Detailed analytics</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check text-ruby mt-1 mr-2"></i>
+              <span class="text-gray-300"><b>20% management fee for clipper coordination and execution</b></span>
+            </li>
+          </ul>
+          <a href="#contact"
+            class="block w-full bg-gradient-to-r from-ruby to-orange-500 text-white text-center py-4 rounded-full font-bold hover:opacity-90 transition-opacity glow">
+            Choose Plan
+          </a>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="screenshots-gallery">
-      <h3>Instagram Success Screenshots</h3>
-      <div class="slideshow-container">
-        <div class="screenshots-container">
-          <div class="screenshot-item active">
-            <img src="https://i.ibb.co/XxkRqRxV/Screenshot-20250620-082740-Instagram-1.jpg"
-              alt="Instagram Analytics Screenshot">
+  <!-- Sample Clip Section -->
+  <section class="py-20 bg-dark-800">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-sm font-medium text-gray-500">OUR WORK</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Sample <span class="gradient-text">Clip</span></h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="clip-sample bg-dark-700 rounded-xl overflow-hidden border border-dark-600">
+          <div class="aspect-w-16 aspect-h-9 bg-dark-900 flex items-center justify-center relative">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-dark-900/20 z-10"></div>
+            <div class="text-center p-8 z-20">
+              <button
+                class="w-20 h-20 bg-gradient-to-r from-ruby to-orange-500 rounded-full flex items-center justify-center mb-4 glow hover:opacity-90 transition-opacity">
+                <i class="fas fa-play text-white text-2xl"></i>
+              </button>
+              <p class="text-white font-medium">Sample clip preview - This would show a real example of our work</p>
+            </div>
           </div>
-          <div class="screenshot-item">
-            <img src="https://i.ibb.co/LD9yppGB/Screenshot-20250621-083222-Instagram-1.jpg"
-              alt="Instagram Analytics Screenshot">
-          </div>
-          <div class="screenshot-item">
-            <img src="https://via.placeholder.com/400x200/333333/ffffff?text=Instagram+Screenshot+3" alt="Instagram Analytics Screenshot">
+          <div class="p-6 bg-dark-700">
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="font-bold text-lg text-white">Engaging Content Clip</h3>
+                <p class="text-gray-400">1.2M views • 84% retention</p>
+              </div>
+              <div class="flex space-x-2">
+                <span class="bg-ruby/10 text-ruby px-3 py-1 rounded-full text-sm font-medium">Viral</span>
+                <span class="bg-dark-600 text-gray-300 px-3 py-1 rounded-full text-sm font-medium">0:42</span>
+              </div>
+            </div>
           </div>
         </div>
-        <button class="slideshow-nav prev" onclick="prevSlide()">‹</button>
-        <button class="slideshow-nav next" onclick="nextSlide()">›</button>
-      </div>
-      <div class="slideshow-indicators">
-        <div class="indicator active" onclick="goToSlide(0)"></div>
-        <div class="indicator" onclick="goToSlide(1)"></div>
-        <div class="indicator" onclick="goToSlide(2)"></div>
       </div>
     </div>
   </section>
 
-  <section id="faq">
-    <h2 class="section-title">FAQ</h2>
-    <div class="faq-item">
-      <div class="faq-question">How fast is delivery?</div>
-      <div class="faq-answer">Typically 24-48 hours for standard edits. Larger orders may take longer.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">Which platforms do you support?</div>
-      <div class="faq-answer">We create content for TikTok, Instagram Reels, YouTube Shorts, and more.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">Can I get custom packages?</div>
-      <div class="faq-answer">Yes! Contact us for tailored pricing and services for high-volume or unique needs.</div>
+
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-20 bg-dark-900">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-sm font-medium text-gray-500">HAVE QUESTIONS?</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Frequently Asked <span
+            class="gradient-text">Questions</span></h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <!-- FAQ Item 1 -->
+        <div class="mb-4 bg-dark-800 p-6 rounded-xl border border-dark-700">
+          <button class="faq-toggle w-full flex justify-between items-center text-left">
+            <h3 class="text-lg font-bold text-white">How quickly will I receive my clips?</h3>
+            <i class="fas fa-chevron-down text-ruby transition-transform"></i>
+          </button>
+          <div class="faq-content mt-4 hidden">
+            <p class="text-gray-400">If you order the $10/clip service, we typically begin delivering your first videos
+              within 24 hours, so you can start posting right away. The remaining clips will be delivered throughout the
+              week.
+              <br><br>
+              For view-based campaigns, we launch within 48 hours after setting up visuals and strategy. Once live, our
+              clippers start working immediately to generate results.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="mb-4 bg-dark-800 p-6 rounded-xl border border-dark-700">
+          <button class="faq-toggle w-full flex justify-between items-center text-left">
+            <h3 class="text-lg font-bold text-white">What platforms do you optimize clips for?</h3>
+            <i class="fas fa-chevron-down text-ruby transition-transform"></i>
+          </button>
+          <div class="faq-content mt-4 hidden">
+            <p class="text-gray-400">We specialize in TikTok, Instagram Reels, and YouTube Shorts. Our team formats each
+              clip specifically for the platform you're targeting, including optimal dimensions, captions, and hooks.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="mb-4 bg-dark-800 p-6 rounded-xl border border-dark-700">
+          <button class="faq-toggle w-full flex justify-between items-center text-left">
+            <h3 class="text-lg font-bold text-white">How does the view-based pricing work?</h3>
+            <i class="fas fa-chevron-down text-ruby transition-transform"></i>
+          </button>
+          <div class="faq-content mt-4 hidden">
+            <p class="text-gray-400">With our view-based campaigns, you only pay for the views we generate. We charge $1
+              per 1,000 views, with a minimum campaign budget of $500. Our team will create and distribute clips through
+              our network to maximize your reach.</p>
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="mb-4 bg-dark-800 p-6 rounded-xl border border-dark-700">
+          <button class="faq-toggle w-full flex justify-between items-center text-left">
+            <h3 class="text-lg font-bold text-white">Can I request specific edits to my clips?</h3>
+            <i class="fas fa-chevron-down text-ruby transition-transform"></i>
+          </button>
+          <div class="faq-content mt-4 hidden">
+            <p class="text-gray-400">Absolutely! We welcome your creative input. You can provide specific editing
+              instructions, branding guidelines, or style preferences, and our team will incorporate them into your
+              clips.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="apply">
-    <h2 class="section-title">Join Our Team</h2>
-    <p>Are you a talented video editor passionate about creating viral content? We’re always looking for new clippers to
-      join our team and help creators succeed. Apply today and become part of Ruby Clips.</p>
-    <a href="#" class="cta-btn">Apply as a Clip Editor</a>
+  <!-- For Clippers Section -->
+  <section class="py-20 bg-dark-800">
+    <div class="container mx-auto px-6">
+      <div
+        class="max-w-4xl mx-auto bg-gradient-to-r from-dark-700 to-dark-800 rounded-xl p-12 text-center border border-dark-600">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Join Our Team of <span
+            class="gradient-text">Professional Clippers</span></h2>
+        <p class="text-xl mb-8 text-gray-400">We're always looking for talented video editors to join our network.
+          Competitive pay and flexible hours.</p>
+        <a href="#clipper-application"
+          class="inline-block bg-gradient-to-r from-ruby to-orange-500 text-white px-8 py-4 rounded-full font-bold hover:opacity-90 transition-opacity glow">
+          Apply Now
+        </a>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    &copy; 2025 Ruby Clips. All rights reserved.
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-dark-900">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-sm font-medium text-gray-500">GET IN TOUCH</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Start Your <span class="gradient-text">Project</span>
+        </h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-6">Ready to grow your audience?</h3>
+          <p class="text-gray-400 mb-8">Fill out the form and we'll get back to you within 24 hours to discuss how Ruby
+            Clips can help you achieve your content goals.</p>
+
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center mr-4">
+                <i class="fas fa-envelope text-ruby"></i>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Email us at</p>
+                <p class="font-medium text-white">hello@rubyclips.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center mr-4">
+                <i class="fas fa-phone-alt text-ruby"></i>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Call us at</p>
+                <p class="font-medium text-white">(555) 123-4567</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <form class="bg-dark-800 p-8 rounded-xl border border-dark-700">
+            <div class="mb-6">
+              <label for="name" class="block text-gray-300 font-medium mb-2">Your Name</label>
+              <input type="text" id="name"
+                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white">
+            </div>
+
+            <div class="mb-6">
+              <label for="email" class="block text-gray-300 font-medium mb-2">Email Address</label>
+              <input type="email" id="email"
+                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white">
+            </div>
+
+            <div class="mb-6">
+              <label for="service" class="block text-gray-300 font-medium mb-2">Service Interested In</label>
+              <select id="service"
+                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white">
+                <option value="">Select a service</option>
+                <option value="premium">Premium Clipping Service</option>
+                <option value="campaign">View-Based Campaign</option>
+                <option value="both">Both Services</option>
+              </select>
+            </div>
+
+            <div class="mb-6">
+              <label for="message" class="block text-gray-300 font-medium mb-2">Your Message</label>
+              <textarea id="message" rows="4"
+                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full bg-gradient-to-r from-ruby to-orange-500 text-white py-4 rounded-full font-bold hover:opacity-90 transition-opacity glow">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clipper Application (Hidden until clicked) -->
+  <section id="clipper-application" class="hidden py-20 bg-dark-800">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-sm font-medium text-gray-500">JOIN OUR TEAM</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">Clipper <span
+            class="gradient-text">Application</span></h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto bg-dark-700 p-8 rounded-xl border border-dark-600">
+        <form>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
+              <label for="app-name" class="block text-gray-300 font-medium mb-2">Full Name</label>
+              <input type="text" id="app-name"
+                class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white">
+            </div>
+
+            <div>
+              <label for="app-email" class="block text-gray-300 font-medium mb-2">Email Address</label>
+              <input type="email" id="app-email"
+                class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white">
+            </div>
+
+            <div>
+              <label for="app-portfolio" class="block text-gray-300 font-medium mb-2">Portfolio Link</label>
+              <input type="url" id="app-portfolio"
+                class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white"
+                placeholder="Website, YouTube, etc.">
+            </div>
+
+            <div>
+              <label for="app-experience" class="block text-gray-300 font-medium mb-2">Years of Experience</label>
+              <select id="app-experience"
+                class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white">
+                <option value="">Select</option>
+                <option value="0-1">0-1 years</option>
+                <option value="1-3">1-3 years</option>
+                <option value="3+">3+ years</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <label class="block text-gray-300 font-medium mb-2">Which platforms are you most experienced with?</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <label class="flex items-center">
+                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <span class="ml-2 text-gray-300">TikTok</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <span class="ml-2 text-gray-300">Instagram</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <span class="ml-2 text-gray-300">YouTube</span>
+              </label>
+              <label class="flex items-center">
+                <input type="checkbox" class="rounded text-ruby bg-dark-600 border-dark-500">
+                <span class="ml-2 text-gray-300">Facebook</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <label for="app-why" class="block text-gray-300 font-medium mb-2">Why do you want to join Ruby
+              Clips?</label>
+            <textarea id="app-why" rows="4"
+              class="w-full px-4 py-3 bg-dark-600 border border-dark-500 rounded-lg text-white"></textarea>
+          </div>
+
+          <div class="flex justify-center">
+            <button type="submit"
+              class="bg-gradient-to-r from-ruby to-orange-500 text-white px-12 py-4 rounded-full font-bold hover:opacity-90 transition-opacity glow">
+              Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark-950 text-gray-400 py-12 border-t border-dark-800">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-r from-ruby to-orange-500 flex items-center justify-center">
+              <i class="fas fa-cut text-white text-sm"></i>
+            </div>
+            <span class="text-xl font-bold text-white">Ruby<span class="gradient-text">Clips</span></span>
+          </div>
+          <p class="text-gray-500">Premium content clipping services with guaranteed results.</p>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold text-white mb-6">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="hover:text-white transition-colors">Premium Clips</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">View Campaigns</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Custom Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold text-white mb-6">Company</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-bold text-white mb-6">Connect</h4>
+          <div class="flex space-x-4">
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-dark-700 transition-colors hover:text-white">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-dark-700 transition-colors hover:text-white">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-dark-700 transition-colors hover:text-white">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#"
+              class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center hover:bg-dark-700 transition-colors hover:text-white">
+              <i class="fab fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-dark-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500 mb-4 md:mb-0">© 2025 Ruby Clips. All rights reserved.</p>
+        <div class="flex space-x-6">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script>
-    // FAQ functionality
-    document.querySelectorAll('.faq-question').forEach(question => {
-      question.addEventListener('click', () => {
-        question.parentElement.classList.toggle('active');
+    // FAQ Toggle Functionality
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('i');
+
+        content.classList.toggle('hidden');
+        icon.classList.toggle('fa-chevron-down');
+        icon.classList.toggle('fa-chevron-up');
       });
     });
 
-    // Slideshow functionality
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.screenshot-item');
-    const indicators = document.querySelectorAll('.indicator');
-    const totalSlides = slides.length;
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
 
-    function updateSlideshow() {
-      // Remove all classes from slides
-      slides.forEach((slide, index) => {
-        slide.classList.remove('active', 'prev');
-        if (index === currentSlide) {
-          slide.classList.add('active');
-        } else if (index < currentSlide) {
-          slide.classList.add('prev');
+        if (this.getAttribute('href') === '#clipper-application') {
+          document.getElementById('clipper-application').classList.remove('hidden');
+          window.scrollTo({
+            top: document.getElementById('clipper-application').offsetTop - 100,
+            behavior: 'smooth'
+          });
+          return;
         }
+
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        document.querySelector(targetId).scrollIntoView({
+          behavior: 'smooth'
+        });
       });
-      
-      // Update indicators
-      indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentSlide);
-      });
-    }
-
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlideshow();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateSlideshow();
-    }
-
-    function goToSlide(index) {
-      currentSlide = index;
-      updateSlideshow();
-    }
-
-    // Auto-advance slideshow every 4 seconds
-    setInterval(nextSlide, 4000);
-
-    // Touch/swipe support for mobile
-    let startX = 0;
-    let endX = 0;
-
-    const slideshowContainer = document.querySelector('.slideshow-container');
-    
-    slideshowContainer.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
     });
 
-    slideshowContainer.addEventListener('touchend', e => {
-      endX = e.changedTouches[0].clientX;
-      handleSwipe();
+    // Form submission handling
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Form submitted successfully! We will get back to you soon.');
+        this.reset();
+      });
     });
-
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = startX - endX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          nextSlide(); // Swipe left - go to next
-        } else {
-          prevSlide(); // Swipe right - go to previous
-        }
-      }
-    }
   </script>
 </body>
 
