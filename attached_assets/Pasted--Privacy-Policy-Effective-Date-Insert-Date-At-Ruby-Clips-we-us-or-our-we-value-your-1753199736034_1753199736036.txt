@@ -1,0 +1,97 @@
+🔐 Privacy Policy
+Effective Date: [Insert Date]
+
+At Ruby Clips ("we", "us", or "our"), we value your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our services or visit our website.
+
+1. Information We Collect
+We may collect:
+
+Contact Information: Name, email, social media handles.
+
+Order Details: Content links, campaign goals, brand guidelines.
+
+Payment Information: Handled securely via third-party processors (e.g., Stripe, PayPal).
+
+Usage Data: Device type, browser, IP address, site activity.
+
+2. How We Use Your Information
+To deliver and manage our clipping services.
+
+To communicate with you regarding your orders or campaigns.
+
+To improve our services and customer experience.
+
+To provide analytics and reporting.
+
+3. Information Sharing
+We do not sell your information. We only share it:
+
+With internal team members or clippers assigned to your project.
+
+With trusted third-party tools for payments or analytics.
+
+If required by law.
+
+4. Data Security
+We use secure protocols (e.g., HTTPS) and limited-access systems to keep your data safe.
+
+5. Your Rights
+You can request to review, update, or delete your personal data by contacting us.
+
+6. Contact
+Email: [your support email]
+Website: [your domain]
+
+📄 Terms of Service
+Effective Date: [Insert Date]
+
+These Terms govern your use of Ruby Clips’ services. By placing an order or using our site, you agree to them.
+
+1. Services
+We provide:
+
+Per-Clip Orders: $10/clip, with turnaround starting within 24 hours.
+
+View-Based Campaigns: $1 per 1,000 views, budget-scaled. Minimum $500.
+A 20% management fee is applied for campaign setup, visuals, anti-botting, and quality assurance.
+
+2. Payments & Refunds
+All services are prepaid unless otherwise agreed.
+
+If your view goal isn’t met within 30 days, you can choose between:
+
+A partial refund based on remaining views
+
+Rolling over the balance to the next month
+
+No refunds for completed clips unless we failed to meet agreed expectations.
+
+3. Client Responsibilities
+You agree to:
+
+Provide content and instructions you legally own or are authorized to use.
+
+Avoid submitting any material that violates platform rules, copyright, or laws.
+
+4. Ownership & Rights
+You retain full ownership of the content you provide.
+
+We reserve the right to display finished clips in our portfolio unless you request otherwise in writing.
+
+5. Subcontracting
+We work with professional clippers and reserve the right to assign them to projects under our management.
+
+6. Limitations
+We are not liable for:
+
+Sudden changes in social platform algorithms or visibility.
+
+Third-party issues like platform bans or post takedowns.
+
+7. Changes to Terms
+We may revise these terms. Continued use of our services constitutes acceptance of any updates.
+
+8. Contact
+Email: [your support email]
+Website: [your domain]
+
