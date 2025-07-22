@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+  <!-- Calendly CSS -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -357,77 +359,23 @@
         </h2>
       </div>
 
-      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div>
-          <h3 class="text-2xl font-bold text-white mb-6">Ready to grow your audience?</h3>
-          <p class="text-gray-400 mb-8">Fill out the form and we'll get back to you within 24 hours to discuss how Ruby
-            Clips can help you achieve your content goals.</p>
-
-          <div class="space-y-4">
-            <div class="flex items-center">
-              <div class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center mr-4">
-                <i class="fas fa-envelope text-ruby"></i>
-              </div>
-              <div>
-                <p class="text-sm text-gray-500">Email us at</p>
-                <p class="font-medium text-white">hello@rubyclips.com</p>
-              </div>
-            </div>
-
-            <div class="flex items-center">
-              <div class="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center mr-4">
-                <i class="fas fa-phone-alt text-ruby"></i>
-              </div>
-              <div>
-                <p class="text-sm text-gray-500">Call us at</p>
-                <p class="font-medium text-white">(555) 123-4567</p>
-              </div>
-            </div>
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="bg-dark-800 p-12 rounded-xl border border-dark-700">
+          <h3 class="text-3xl font-bold text-white mb-6">Ready to grow your audience?</h3>
+          <p class="text-xl text-gray-400 mb-8">Book a FREE strategy call to discuss how Ruby Clips can help you achieve your content goals.</p>
+          
+          <div class="mb-8">
+            <h4 class="text-2xl font-bold gradient-text mb-4">Book a FREE Call</h4>
+            <p class="text-gray-300 mb-6">Let's discuss your content strategy and how our professional clippers can help you go viral.</p>
           </div>
-        </div>
-
-        <div>
-          <form action="https://formspree.io/f/xovljlnd" method="POST"
-            class="bg-dark-800 p-8 rounded-xl border border-dark-700">
-            <div class="mb-6">
-              <label for="name" class="block text-gray-300 font-medium mb-2">Your Name</label>
-              <input type="text" id="name" name="name" required
-                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white">
-            </div>
-
-            <div class="mb-6">
-              <label for="email" class="block text-gray-300 font-medium mb-2">Email Address</label>
-              <input type="email" id="email" name="email" required
-                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white">
-            </div>
-
-            <div class="mb-6">
-              <label for="service" class="block text-gray-300 font-medium mb-2">Service Interested In</label>
-              <select id="service" name="service"
-                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white">
-                <option value="">Select a service</option>
-                <option value="premium">Premium Clipping Service</option>
-                <option value="campaign">View-Based Campaign</option>
-                <option value="both">Both Services</option>
-              </select>
-            </div>
-
-            <div class="mb-6">
-              <label for="message" class="block text-gray-300 font-medium mb-2">Your Message</label>
-              <textarea id="message" name="message" rows="4"
-                class="w-full px-4 py-3 bg-dark-700 border border-dark-600 rounded-lg focus:ring-2 focus:ring-ruby focus:border-transparent text-white"></textarea>
-            </div>
-
-            <!-- Hidden field to specify recipient -->
-            <input type="hidden" name="_to" value="betsegawg7@gmail.com">
-            <input type="hidden" name="_subject" value="New Ruby Clips Contact Form Submission">
-            <input type="hidden" name="_next" value="https://rubyclips.com/thank-you">
-
-            <button type="submit"
-              class="w-full bg-gradient-to-r from-ruby to-orange-500 text-white py-4 rounded-full font-bold hover:opacity-90 transition-opacity glow">
-              Send Message
-            </button>
-          </form>
+          
+          <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/betsegawg7/book-your-free-content-clipping-strategy-call'});return false;"
+            class="inline-block bg-gradient-to-r from-ruby to-orange-500 text-white px-12 py-4 rounded-full font-bold hover:opacity-90 transition-opacity glow text-lg">
+            <i class="fas fa-calendar-alt mr-2"></i>
+            Schedule Your FREE Strategy Call
+          </a>
+          
+          <p class="text-sm text-gray-500 mt-4">No commitment required • 15-minute consultation</p>
         </div>
       </div>
     </div>
@@ -628,6 +576,8 @@
 
     // Form submission handling removed - letting Formspree handle it properly
   </script>
+  <!-- Calendly JavaScript -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 
 </html>
