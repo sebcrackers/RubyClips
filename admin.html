@@ -3,317 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADCASH OS // PUBLISHER TERMINAL v2.0</title>
+    <title>ADCASH OS // PUBLISHER TERMINAL v2.3</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --text-primary: #e0e0e0;
-            --text-bright: #ffffff;
-            --text-dim: #808080;
-            --accent-cyan: #00ffff;
-            --accent-green: #00ff00;
-            --accent-red: #ff0000;
-            --border-color: #e0e0e0;
+            --bg-color: #0a0a0a; --text-primary: #e0e0e0; --text-bright: #ffffff;
+            --text-dim: #808080; --accent-cyan: #00ffff; --accent-green: #00ff00;
+            --accent-red: #ff0000; --border-color: #e0e0e0;
             --terminal-glow: 0 0 5px rgba(255, 255, 255, 0.4);
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: 'Share Tech Mono', monospace;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* CRT Scanline Effect */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
-            z-index: 9999;
-            pointer-events: none;
-            opacity: 0.8;
-        }
-
-        /* CRT Flicker Effect */
-        body::after {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.02);
-            opacity: 0;
-            z-index: 9998;
-            pointer-events: none;
-            animation: flicker 0.15s infinite;
-        }
-
-        @keyframes flicker {
-            0% { opacity: 0.27; }
-            5% { opacity: 0.34; }
-            10% { opacity: 0.23; }
-            15% { opacity: 0.9; }
-            20% { opacity: 0.18; }
-            25% { opacity: 0.83; }
-            30% { opacity: 0.65; }
-            35% { opacity: 0.67; }
-            40% { opacity: 0.26; }
-            45% { opacity: 0.84; }
-            50% { opacity: 0.96; }
-            55% { opacity: 0.08; }
-            60% { opacity: 0.2; }
-            65% { opacity: 0.71; }
-            70% { opacity: 0.53; }
-            75% { opacity: 0.37; }
-            80% { opacity: 0.71; }
-            85% { opacity: 0.97; }
-            90% { opacity: 0.94; }
-            95% { opacity: 0.36; }
-            100% { opacity: 0.2; }
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 20px;
-        }
-
-        header {
-            grid-column: 1 / -1;
-            border: 2px solid var(--border-color);
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            box-shadow: var(--terminal-glow);
-        }
-
-        h1 {
-            font-family: 'VT323', monospace;
-            font-size: 2.5rem;
-            color: var(--text-bright);
-            text-shadow: var(--terminal-glow);
-            letter-spacing: 2px;
-        }
-
-        .status-bar {
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-        }
-
-        .panel {
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            background: rgba(20, 20, 20, 0.6);
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
-        }
-
-        .panel h2 {
-            font-family: 'VT323', monospace;
-            font-size: 1.8rem;
-            color: var(--text-bright);
-            border-bottom: 1px solid var(--text-dim);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .left-panel {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .log-output {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            height: 450px;
-            overflow-y: auto;
-            line-height: 1.4;
-            color: var(--accent-green);
-        }
-
-        .log-output::-webkit-scrollbar { width: 8px; }
-        .log-output::-webkit-scrollbar-track { background: #111; }
-        .log-output::-webkit-scrollbar-thumb { background: #444; }
-
-        .right-panel {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-box {
-            border: 1px solid var(--text-dim);
-            padding: 15px;
-            text-align: center;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-family: 'VT323', monospace;
-            font-size: 2rem;
-            color: var(--text-bright);
-            text-shadow: var(--terminal-glow);
-        }
-
-        .chart-container {
-            border: 1px solid var(--text-dim);
-            padding: 15px;
-            height: 300px;
-            margin-bottom: 20px;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .table-container {
-            border: 1px solid var(--text-dim);
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px dashed var(--text-dim);
-        }
-
-        th {
-            color: var(--accent-cyan);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        tr:hover {
-            background-color: rgba(255,255,255,0.05);
-        }
-
-        .cursor-blink {
-            display: inline-block;
-            width: 10px;
-            height: 15px;
-            background-color: var(--text-bright);
-            animation: blink 1s steps(1) infinite;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        .hidden {
-            display: none;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-primary); font-family: 'Share Tech Mono', monospace; min-height: 100vh; overflow-x: hidden; }
+        body::before { content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 2px, 3px 100%; z-index: 9999; pointer-events: none; opacity: 0.8; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 350px 1fr; gap: 20px; }
+        header { grid-column: 1 / -1; border: 2px solid var(--border-color); padding: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; box-shadow: var(--terminal-glow); }
+        h1 { font-family: 'VT323', monospace; font-size: 2.5rem; color: var(--text-bright); text-shadow: var(--terminal-glow); letter-spacing: 2px; }
+        .status-bar { font-size: 1.2rem; color: var(--accent-cyan); }
+        .panel { border: 1px solid var(--border-color); padding: 20px; background: rgba(20, 20, 20, 0.6); box-shadow: inset 0 0 15px rgba(0,0,0,0.5); margin-bottom: 20px; }
+        .panel h2 { font-family: 'VT323', monospace; font-size: 1.8rem; color: var(--text-bright); border-bottom: 1px solid var(--text-dim); padding-bottom: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; }
+        .left-panel { display: flex; flex-direction: column; }
+        .log-output { font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; height: 450px; overflow-y: auto; line-height: 1.4; color: var(--accent-green); }
+        .log-output::-webkit-scrollbar { width: 8px; } .log-output::-webkit-scrollbar-track { background: #111; } .log-output::-webkit-scrollbar-thumb { background: #444; }
+        .right-panel { display: flex; flex-direction: column; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        .stat-box { border: 1px solid var(--text-dim); padding: 15px; text-align: center; background: rgba(0,0,0,0.3); }
+        .stat-label { font-size: 0.9rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 8px; }
+        .stat-value { font-family: 'VT323', monospace; font-size: 2rem; color: var(--text-bright); text-shadow: var(--terminal-glow); }
+        .chart-container { border: 1px solid var(--text-dim); padding: 15px; height: 300px; margin-bottom: 20px; background: rgba(0,0,0,0.2); }
+        .table-container { border: 1px solid var(--text-dim); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px dashed var(--text-dim); }
+        th { color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px; }
+        tr:hover { background-color: rgba(255,255,255,0.05); }
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>ADCASH OS // PUBLISHER TERMINAL v2.0</h1>
+            <h1>ADCASH OS // PUBLISHER TERMINAL v2.3</h1>
             <div class="status-bar" id="status-bar">STATUS: INITIALIZING...</div>
         </header>
 
-        <!-- LEFT PANEL: SYSTEM LOG -->
         <div class="left-panel panel">
             <h2>SYSTEM LOG <span style="color: var(--accent-green)">●</span></h2>
             <div class="log-output" id="log-output"></div>
         </div>
 
-        <!-- RIGHT PANEL: DATA VISUALIZATION -->
         <div class="right-panel">
-            
-            <!-- ACCOUNT BALANCE & STATS -->
             <div class="panel" style="margin-bottom: 20px;">
                 <h2>ACCOUNT OVERVIEW</h2>
                 <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-label">Account Balance</div>
-                        <div class="stat-value" id="stat-balance">-- EUR</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Total Earnings (7d)</div>
-                        <div class="stat-value" id="stat-earnings">-- EUR</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Unique Users (7d)</div>
-                        <div class="stat-value" id="stat-uniques">--</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Clicks (7d)</div>
-                        <div class="stat-value" id="stat-clicks">--</div>
-                    </div>
+                    <div class="stat-box"><div class="stat-label">Account Balance</div><div class="stat-value" id="stat-balance">--</div></div>
+                    <div class="stat-box"><div class="stat-label">Total Earnings (7d)</div><div class="stat-value" id="stat-earnings">--</div></div>
+                    <div class="stat-box"><div class="stat-label">Unique Users (7d)</div><div class="stat-value" id="stat-uniques">--</div></div>
+                    <div class="stat-box"><div class="stat-label">Clicks (7d)</div><div class="stat-value" id="stat-clicks">--</div></div>
                 </div>
             </div>
 
-            <!-- EARNINGS GRAPH -->
             <div class="panel" style="margin-bottom: 20px;">
                 <h2>EARNINGS GRAPH (LAST 7 DAYS)</h2>
-                <div class="chart-container">
-                    <canvas id="earningsChart"></canvas>
-                </div>
+                <div class="chart-container"><canvas id="earningsChart"></canvas></div>
             </div>
 
-            <!-- DATA TABLE -->
             <div class="panel">
                 <h2>ZONE BREAKDOWN DATA</h2>
                 <div class="table-container">
                     <table id="data-table">
                         <thead>
-                            <tr>
-                                <th>Zone ID</th>
-                                <th>Earnings (EUR)</th>
-                                <th>Unique Users</th>
-                                <th>Clicks</th>
-                                <th>Unique eCPM</th>
-                            </tr>
+                            <tr><th>Zone ID</th><th>Earnings</th><th>Unique Users</th><th>Clicks</th><th>Unique eCPM</th></tr>
                         </thead>
-                        <tbody id="table-body">
-                            <!-- Data will be populated here -->
-                        </tbody>
+                        <tbody id="table-body"></tbody>
                     </table>
                 </div>
             </div>
@@ -323,7 +86,9 @@
     <script>
         // --- CONFIGURATION ---
         const API_KEY = "/SuprblgeDs0cPCjI37aZ5o1ROynI6uWOvKNWdC5SOPsspiRISSpIplcGbRPizxS5SXJeMU7X6994CQyQCFX5XMYk62d6DJSDsOBqDpkmmvyl1fNDfBhYpqBXV56WM22E/M5F31dFjR0+y8RV8hrXQ==";
-        const BASE_URL = "https://adcash.myadcash.com/api/v2";
+        
+        // We now route requests through the proxy.php file to bypass browser CORS entirely
+        const PROXY_URL = "proxy.php?endpoint=";
 
         // --- DOM ELEMENTS ---
         const logOutput = document.getElementById('log-output');
@@ -351,67 +116,58 @@
         // --- API FUNCTIONS ---
         async function authenticate() {
             logMessage("INITIATING AUTHENTICATION SEQUENCE...");
-            try {
-                // POST /api/v2/auth/token
-                const response = await fetch(`${BASE_URL}/auth/token`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ api_token: API_KEY })
-                });
+            const targetUrl = `${PROXY_URL}/auth/token`;
+            
+            const response = await fetch(targetUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ api_token: API_KEY })
+            });
 
-                if (!response.ok) throw new Error(`Auth Failed: HTTP ${response.status}`);
-                
-                const data = await response.json();
-                const token = data.data.access_token;
-                logMessage("AUTHENTICATION SUCCESSFUL. TOKEN ACQUIRED. LIFESPAN: 15M", 'var(--accent-cyan)');
-                return token;
-            } catch (error) {
-                throw error; // Bubble up to main catch block
+            const data = await response.json();
+            
+            if (!response.ok || !data.data || !data.data.access_token) {
+                throw new Error(data.error?.message || `Auth Failed: HTTP ${response.status}`);
             }
+            
+            logMessage("AUTHENTICATION SUCCESSFUL. TOKEN ACQUIRED.", 'var(--accent-cyan)');
+            return data.data.access_token;
         }
 
         async function getBalance(token) {
             logMessage("FETCHING ACCOUNT BALANCE...");
-            const response = await fetch(`${BASE_URL}/publishers/balance`, {
+            const response = await fetch(`${PROXY_URL}/publishers/balance`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            if (!response.ok) throw new Error(`Balance Failed: HTTP ${response.status}`);
             const data = await response.json();
+            if (!response.ok) throw new Error(data.error?.message || `Balance Failed: HTTP ${response.status}`);
             return data.data;
         }
 
         async function getReports(token) {
             logMessage("FETCHING 7-DAY REPORTING DATA...");
-            
-            // Calculate dates for the last 7 days
             const today = new Date();
             const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
             const formatDate = (d) => d.toISOString().split('T')[0];
             
             const startDate = formatDate(weekAgo);
             const endDate = formatDate(today);
-
-            const url = `${BASE_URL}/publishers/reports?start_date=${startDate}&end_date=${endDate}&group_by=date,zone`;
-
-            const response = await fetch(url, {
+            
+            const response = await fetch(`${PROXY_URL}/publishers/reports?start_date=${startDate}&end_date=${endDate}&group_by=date,zone`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            if (!response.ok) throw new Error(`Reports Failed: HTTP ${response.status}`);
             const data = await response.json();
+            if (!response.ok) throw new Error(data.error?.message || `Reports Failed: HTTP ${response.status}`);
             return data.data.rows;
         }
 
         // --- RENDER FUNCTIONS ---
         function renderUI(balanceData, reportsData) {
-            // Render Stats
             statBalance.innerHTML = `${balanceData.balance.toFixed(2)} ${balanceData.currency}`;
             
-            // Calculate totals from report rows
-            let totalEarnings = 0;
-            let totalUniques = 0;
-            let totalClicks = 0;
+            let totalEarnings = 0, totalUniques = 0, totalClicks = 0;
             const chartData = {};
             const zoneData = {};
 
@@ -420,11 +176,10 @@
                 totalUniques += row.unique_users;
                 totalClicks += row.clicks;
 
-                // Aggregate for chart by date
-                if (!chartData[row.date]) chartData[row.date] = 0;
-                chartData[row.date] += parseFloat(row.earnings);
+                const dateKey = row.date || "Unknown Date";
+                if (!chartData[dateKey]) chartData[dateKey] = 0;
+                chartData[dateKey] += parseFloat(row.earnings);
 
-                // Aggregate by zone for table
                 if (!zoneData[row.zone]) {
                     zoneData[row.zone] = { earnings: 0, uniques: 0, clicks: 0, ecpm: row.unique_users_ecpm };
                 }
@@ -433,30 +188,22 @@
                 zoneData[row.zone].clicks += row.clicks;
             });
 
-            statEarnings.innerHTML = `${totalEarnings.toFixed(2)} EUR`;
+            statEarnings.innerHTML = `${totalEarnings.toFixed(2)} ${balanceData.currency}`;
             statUniques.innerHTML = totalUniques.toLocaleString();
             statClicks.innerHTML = totalClicks.toLocaleString();
 
-            // Render Table
             tableBody.innerHTML = "";
             Object.keys(zoneData).forEach(zoneId => {
                 const z = zoneData[zoneId];
                 const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${zoneId}</td>
-                    <td style="color: var(--accent-green)">${z.earnings.toFixed(2)}</td>
-                    <td>${z.uniques.toLocaleString()}</td>
-                    <td>${z.clicks}</td>
-                    <td>${z.ecpm}</td>
-                `;
+                tr.innerHTML = `<td>${zoneId}</td><td style="color: var(--accent-green)">${z.earnings.toFixed(2)}</td><td>${z.uniques.toLocaleString()}</td><td>${z.clicks}</td><td>${z.ecpm || "N/A"}</td>`;
                 tableBody.appendChild(tr);
             });
 
-            // Render Graph
-            renderChart(chartData);
+            renderChart(chartData, balanceData.currency);
         }
 
-        function renderChart(chartData) {
+        function renderChart(chartData, currency) {
             const ctx = document.getElementById('earningsChart').getContext('2d');
             const labels = Object.keys(chartData).sort();
             const dataPoints = labels.map(date => chartData[date]);
@@ -466,7 +213,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Daily Earnings (EUR)',
+                        label: `Daily Earnings (${currency})`,
                         data: dataPoints,
                         borderColor: '#ffffff',
                         backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -482,76 +229,42 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: { color: '#e0e0e0', font: { family: "'Share Tech Mono', monospace", size: 14 } }
-                        }
-                    },
+                    plugins: { legend: { labels: { color: '#e0e0e0', font: { family: "'Share Tech Mono', monospace", size: 14 } } } },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                            ticks: { color: '#808080', font: { family: "'Share Tech Mono', monospace" } }
-                        },
-                        x: {
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                            ticks: { color: '#808080', font: { family: "'Share Tech Mono', monospace" } }
-                        }
+                        y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#808080', font: { family: "'Share Tech Mono', monospace" } } },
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.1)' }, ticks: { color: '#808080', font: { family: "'Share Tech Mono', monospace" } } }
                     }
                 }
             });
         }
 
-        // --- SIMULATION FALLBACK ---
-        // Ensures you can see the UI even if CORS blocks the request locally.
-        function runSimulationMode() {
-            logMessage("WARN: LIVE API CONNECTION BLOCKED BY BROWSER CORS.", "var(--accent-red)");
-            logMessage("SWITCHING TO SIMULATION MODE TO DISPLAY UI...", "var(--accent-cyan)");
-            
-            const mockBalance = { balance: 3145.75, currency: "EUR" };
-            const mockReports = [
-                { date: "2026-08-25", zone: "10380130", earnings: "45.20", unique_users: 1200, clicks: 15, unique_users_ecpm: "2.61" },
-                { date: "2026-08-25", zone: "10380132", earnings: "85.50", unique_users: 2400, clicks: 30, unique_users_ecpm: "4.84" },
-                { date: "2026-08-26", zone: "10380130", earnings: "55.10", unique_users: 1400, clicks: 20, unique_users_ecpm: "2.71" },
-                { date: "2026-08-26", zone: "10380134", earnings: "120.00", unique_users: 3000, clicks: 45, unique_users_ecpm: "1.67" },
-                { date: "2026-08-27", zone: "10380132", earnings: "95.25", unique_users: 2100, clicks: 25, unique_users_ecpm: "5.10" },
-                { date: "2026-08-28", zone: "10380130", earnings: "40.80", unique_users: 1100, clicks: 10, unique_users_ecpm: "3.00" },
-                { date: "2026-08-28", zone: "10380136", earnings: "18.57", unique_users: 9175, clicks: 0, unique_users_ecpm: "2.02" },
-                { date: "2026-08-29", zone: "10380134", earnings: "190.15", unique_users: 5400, clicks: 60, unique_users_ecpm: "4.00" }
-            ];
-
-            setTimeout(() => renderUI(mockBalance, mockReports), 500);
-            setTimeout(() => logMessage("SIMULATION UI RENDERED."), 600);
-        }
-
         // --- INITIALIZATION ---
         async function init() {
             logMessage("SYSTEM BOOT...");
-            logMessage("LOADING ADCASH PUBLISHER MODULE v2...");
+            logMessage("LOADING ADCASH PUBLISHER MODULE v2.3...");
             setStatus("AUTHENTICATING...", "var(--accent-cyan)");
 
             try {
-                // 1. Authenticate
                 const token = await authenticate();
                 setStatus("AUTHENTICATED", "var(--accent-green)");
 
-                // 2. Fetch Data
                 const balance = await getBalance(token);
+                logMessage("BALANCE FETCHED. FETCHING REPORTS...", "var(--accent-cyan)");
+
                 const reports = await getReports(token);
 
-                // 3. Render
-                logMessage("DATA RETRIEVED SUCCESSFULLY. RENDERING DASHBOARD...", "var(--text-bright)");
+                logMessage("DATA RETRIEVED. RENDERING DASHBOARD...", "var(--text-bright)");
                 renderUI(balance, reports);
                 setStatus("DATA SYNCED", "var(--accent-green)");
-                logMessage("DASHBOARD ACTIVE. AWAITING NEXT SYNC.", "var(--text-bright)");
+                logMessage("DASHBOARD ACTIVE.", "var(--text-bright)");
 
             } catch (error) {
-                console.error(error);
-                runSimulationMode();
+                console.error("DASHBOARD ERROR:", error);
+                logMessage(`FATAL ERROR: ${error.message}`, "var(--accent-red)");
+                setStatus("API ERROR", "var(--accent-red)");
             }
         }
 
-        // Start the engine
         init();
     </script>
 </body>
