@@ -1,25 +1,32 @@
 <?php
+// Turn on error reporting so we can see if PHP fails
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-// If it's a preflight request, just exit successfully
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { exit(0); }
 
  $endpoint = isset($_GET['endpoint']) ? $_GET['endpoint'] : '/';
  $base_url = "https://adcash.myadcash.com/api/v2";
  $url = $base_url . $endpoint;
 
+// Check if cURL is installed on your host
+if (!function_exists('curl_init')) {
+    echo json_encode(["error" => ["message" => "PHP cURL is NOT installed on your server."]]);
+    exit;
+}
+
  $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $_SERVER['REQUEST_METHOD']);
-
-// FIX: Bypass strict SSL verification (fixes "Unexpected end of JSON" on older hosts)
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
-// Forward headers
  $headers = [];
  $headers[] = 'Content-Type: application/json';
 if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
@@ -27,7 +34,6 @@ if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
 }
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-// Forward body
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = file_get_contents('php://input');
     curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
@@ -41,13 +47,10 @@ curl_close($ch);
 http_response_code($http_code);
 
 if ($err) {
-    // If cURL fails, return a valid JSON error so the dashboard can display it
     echo json_encode(["error" => ["message" => "Proxy cURL Error: " . $err]]);
 } else if (empty($response)) {
-    // If the API returned nothing, return a valid JSON error
-    echo json_encode(["error" => ["message" => "Proxy Error: Adcash API returned an empty response."]]);
+    echo json_encode(["error" => ["message" => "Proxy Error: Adcash returned empty. HTTP Code: " . $http_code]]);
 } else {
-    // Success! Output the real API data
     echo $response;
 }
 ?>
