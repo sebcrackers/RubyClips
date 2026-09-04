@@ -15,6 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { exit(0); }
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $_SERVER['REQUEST_METHOD']);
 
+// FIX: Bypass strict SSL verification (fixes "Unexpected end of JSON" on older hosts)
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
 // Forward headers
  $headers = [];
  $headers[] = 'Content-Type: application/json';
@@ -30,8 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
  $response = curl_exec($ch);
+ $err = curl_error($ch);
  $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-http_response_code($http_code);
-echo $response;
 curl_close($ch);
+
+http_response_code($http_code);
+
+if ($err) {
+    // If cURL fails, return a valid JSON error so the dashboard can display it
+    echo json_encode(["error" => ["message" => "Proxy cURL Error: " . $err]]);
+} else if (empty($response)) {
+    // If the API returned nothing, return a valid JSON error
+    echo json_encode(["error" => ["message" => "Proxy Error: Adcash API returned an empty response."]]);
+} else {
+    // Success! Output the real API data
+    echo $response;
+}
 ?>
